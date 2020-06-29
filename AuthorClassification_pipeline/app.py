@@ -1,3 +1,7 @@
+"""
+This API is for LinearSVC_TFIDF.py
+Use request.py to check the result
+"""
 import numpy as np
 import pandas as pd
 import pickle
