@@ -202,15 +202,32 @@ test_data = pd.read_csv(test_path)
 cleaned_test_data = prep.data_preparation(data=test_data, text_col_name='text')
 # now do the easy job: predict with pipeline
 predictions = clf.predict_proba(cleaned_test_data)
+# to get the probability of exactly one category: for the second category
+#pred_prob = predictions[:,1]
 
 # create the data frame with column name with target lebels and values with predicted probability
 preds = pd.DataFrame(data=predictions, columns = clf.best_estimator_.named_steps['classifier'].classes_)
+# if the best parameter was not there
+#preds = pd.DataFrame(data = predictions, columns=clf.classes_)
+
 
 # now concatenate with id
 out_put = pd.concat([cleaned_test_data[['id']], preds], axis=1)
 out_put.set_index('id', inplace = True)
 print(out_put.head())
 
+# with the predicted lebel in dataframe
+# Note: this is just for understanding how we can get lebels by two methods
+# Now get the predicted labels
+pred_label_index = np.argmax(predictions,axis=1)
+pred_lebel = clf.best_estimator_.named_steps['classifier'].classes_[pred_label_index]
+#Prediction on validation set
+pred_val = clf.predict(cleaned_test_data)
+#%%
+#Create a  DataFrame with the ids and our prediction regarding whether they disenrolled or not
+IDwitPrediction_clf=pd.DataFrame({'Id':cleaned_test_data['id'],'Prediction':pred_lebel, 'Pred2':pred_val})
+
+print(IDwitPrediction_clf.head())
 
 
 
