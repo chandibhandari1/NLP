@@ -216,9 +216,12 @@ out_put = pd.concat([cleaned_test_data[['id']], preds], axis=1)
 out_put.set_index('id', inplace = True)
 print(out_put.head())
 
-# with the predicted lebel in dataframe
-# Note: this is just for understanding how we can get lebels by two methods
-# Now get the predicted labels
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%% get the actual labels for the given docs
+"""
+with the predicted lebel in dataframe
+Note: this is just for understanding how we can get lebels by two methods
+Now get the predicted labels
+"""
 pred_label_index = np.argmax(predictions,axis=1)
 pred_lebel = clf.best_estimator_.named_steps['classifier'].classes_[pred_label_index]
 #Prediction on validation set
