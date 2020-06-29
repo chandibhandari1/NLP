@@ -73,6 +73,7 @@ print(classification_report(y_test, y_pred, target_names=df['author'].unique()))
 conf_mat = confusion_matrix(y_test, y_pred)
 print(conf_mat)
 
+sys.exit(0)
 # plotting the heatmap for confusion matrix
 plt.figure(figsize=(12.8,6))
 sns.heatmap(conf_mat,
@@ -84,7 +85,7 @@ plt.ylabel('Predicted')
 plt.xlabel('Actual')
 plt.title('Confusion matrix')
 plt.show()
+
 # dumping TFIDF and model
-sys.exit(0)
 pickle.dump(tfidf, open("tfidf.pickle", "wb"))
 pickle.dump(model, open("model.pickle", "wb"))
